@@ -17,7 +17,6 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
 @Table(name = "payments")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Payment {
@@ -26,6 +25,7 @@ public class Payment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     BigDecimal amount;
+    String invoiceNumber;
     String reference;
     String redirectUrl;
     String pollUrl;
