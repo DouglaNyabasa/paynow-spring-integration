@@ -14,5 +14,5 @@ import java.math.BigDecimal;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class PaymentItemRequest {
      String name;
-     BigDecimal price;
+     double price;
 }

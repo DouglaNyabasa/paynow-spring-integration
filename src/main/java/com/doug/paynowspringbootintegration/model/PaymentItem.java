@@ -3,7 +3,6 @@ package com.doug.paynowspringbootintegration.model;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.math.BigDecimal;
 
@@ -29,7 +28,7 @@ public class PaymentItem {
 
     @ManyToOne
     @JoinColumn(name = "payment_id")
-     Payment payment;
+    PaymentEntity paymentEntity;
 
     @Override
     public String toString() {

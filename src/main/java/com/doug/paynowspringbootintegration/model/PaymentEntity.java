@@ -4,11 +4,9 @@ package com.doug.paynowspringbootintegration.model;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Builder
@@ -19,7 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 @Table(name = "payments")
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Payment {
+public class PaymentEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -22,6 +22,6 @@ public class PaymentRequest {
 
      String cartDescription;
 
-     List<PaymentItemDto> items;
+     List<PaymentItemRequest> items;
 
 }

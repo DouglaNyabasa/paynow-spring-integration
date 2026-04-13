@@ -10,7 +10,6 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class PaymentStatus {
 
@@ -19,5 +18,11 @@ public class PaymentStatus {
 
      String status;
 
-     BigDecimal amount;
+     double amount;
+
+    public PaymentStatus(boolean paid, String status, double amount) {
+        this.paid = paid;
+        this.status = status;
+        this.amount = amount;
+    }
 }
