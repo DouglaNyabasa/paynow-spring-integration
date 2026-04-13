@@ -1,11 +1,10 @@
 package com.doug.paynowspringbootintegration.payload.request;
 
 
-
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import java.util.List;
+import java.math.BigDecimal;
 
 @Builder
 @Getter
@@ -13,15 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class PaymentRequest {
-
-
-     String invoiceNumber;
-
-     String email;
-
-     String cartDescription;
-
-     List<PaymentItemDto> items;
-
+public class PaymentItemRequest {
+     String name;
+     BigDecimal price;
 }
