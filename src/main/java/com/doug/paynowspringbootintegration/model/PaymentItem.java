@@ -14,7 +14,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
-@Table(name = "paymentItems")
+@Table(name = "payment_items")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class PaymentItem {
 
@@ -29,6 +29,8 @@ public class PaymentItem {
     @ManyToOne
     @JoinColumn(name = "payment_id")
     PaymentEntity paymentEntity;
+
+
 
     @Override
     public String toString() {

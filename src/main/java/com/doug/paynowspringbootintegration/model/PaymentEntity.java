@@ -30,7 +30,12 @@ public class PaymentEntity {
     String status;
     String email;
     String cartDescription;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "payment")
-    private List<PaymentItem> items = new ArrayList<PaymentItem>();
+
+
+
+
+    @OneToMany(mappedBy = "paymentEntity", cascade = CascadeType.ALL, orphanRemoval = true) // Updated here
+    List<PaymentItem> items = new ArrayList<>();
+
 
 }

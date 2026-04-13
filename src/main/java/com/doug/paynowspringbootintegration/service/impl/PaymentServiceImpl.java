@@ -96,6 +96,7 @@ public class PaymentServiceImpl implements PaymentService {
     public PaymentStatus checkPaymentStatus(String pollUrl) {
         StatusResponse statusResponse = paynow.pollTransaction(pollUrl);
 
+        // updating payment method
         paymentRepository.findByPollUrl(pollUrl).ifPresent( paymentEntity -> {
             paymentEntity.setStatus(statusResponse.paid() ? "PAID" : "FAILED" );
             if (statusResponse.paid()){
