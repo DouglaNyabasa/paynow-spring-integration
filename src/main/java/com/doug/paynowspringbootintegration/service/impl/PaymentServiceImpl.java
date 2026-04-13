@@ -13,6 +13,7 @@ import zw.co.paynow.constants.MobileMoneyMethod;
 import zw.co.paynow.core.Payment;
 import zw.co.paynow.core.Paynow;
 import zw.co.paynow.responses.MobileInitResponse;
+import zw.co.paynow.responses.StatusResponse;
 import zw.co.paynow.responses.WebInitResponse;
 
 import java.math.BigDecimal;
@@ -93,6 +94,19 @@ public class PaymentServiceImpl implements PaymentService {
 
     @Override
     public PaymentStatus checkPaymentStatus(String pollUrl) {
-        return null;
+        StatusResponse statusResponse = paynow.pollTransaction(pollUrl);
+
+        paymentRepository.findByPollUrl(pollUrl).ifPresent( paymentEntity -> {
+            paymentEntity.setStatus(statusResponse.paid() ? "PAID" : "FAILED" );
+            if (statusResponse.paid()){
+                paymentEntity.setAmount(BigDecimal.valueOf(statusResponse.getAmount().doubleValue()));
+            }
+            paymentRepository.save(paymentEntity);
+        });
+        return new PaymentStatus(
+                statusResponse.paid(),
+                statusResponse.getStatus().name(),
+                statusResponse.getAmount().doubleValue()
+        );
     }
 }
