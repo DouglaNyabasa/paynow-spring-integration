@@ -31,7 +31,6 @@ public class PaymentServiceImpl implements PaymentService {
         this.paymentRepository = paymentRepository;
     }
 
-
     @Override
     public PaymentResponse createPayment(PaymentRequest paymentRequest) {
 
@@ -39,7 +38,6 @@ public class PaymentServiceImpl implements PaymentService {
         BigDecimal totalAmount = paymentRequest.getItems().stream()
                 .map(item -> BigDecimal.valueOf(item.getPrice()))
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
-
         // Create and save the payment entity
         PaymentEntity paymentEntity =  PaymentEntity.builder()
                 .email(paymentRequest.getEmail())
@@ -47,15 +45,11 @@ public class PaymentServiceImpl implements PaymentService {
                 .cartDescription(paymentRequest.getCartDescription())
                 .amount(totalAmount)
                 .build();
-
         // Create Paynow payment
         Payment payment = paynow.createPayment(paymentRequest.getInvoiceNumber(),paymentRequest.getEmail() != null ? paymentRequest.getEmail() : "");
-
         // add items
         paymentRequest.getItems().forEach(item->{
             payment.add(item.getName(), item.getPrice());
-
-
             // Save payment items
             PaymentItem paymentItem = new PaymentItem();
             paymentItem.setName(item.getName());
@@ -65,6 +59,7 @@ public class PaymentServiceImpl implements PaymentService {
         });
 
         WebInitResponse webInitResponse = paynow.send(payment);
+
 
         if (webInitResponse.success()){
               // updating the payment entity with paynow details
