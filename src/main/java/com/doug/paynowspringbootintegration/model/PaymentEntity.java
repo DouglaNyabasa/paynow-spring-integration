@@ -32,9 +32,8 @@ public class PaymentEntity {
     String cartDescription;
 
 
-
-
-    @OneToMany(mappedBy = "paymentEntity", cascade = CascadeType.ALL, orphanRemoval = true) // Updated here
+    @Builder.Default
+    @OneToMany(mappedBy = "paymentEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     List<PaymentItem> items = new ArrayList<>();
 
 
